@@ -1,0 +1,56 @@
+---
+title: "Analysis of Amazon Customer Reviews"
+author: "Feiyun Yan, Yuchen Dou, Bingyan Liang, Shuwei Liu"
+date: '2022-12-16'
+output: html_document
+---
+**Introduction**
+
+Amazon is one of the largest online shopping websites in the world, and millions of product reviews are posted on this well-known site from users in each continent since 1995. In this way, it is a precious data resource for us to learn about business cycles and financial behaviors. In light of it, we would like to explore a question that has always been in our mind: Are “good products” becoming increasingly popular as time grows?
+
+**Data Description**
+
+The dataset that we utilize is collected and provided by Amazon. Focusing on products related to entertainment, we have a dataset with a size of 11.5GB. Although there are 15 columns in total, considering their relativeness to our topic, we cleaned the dataset and concentrated on six of them. Below is a detailed description of the variables covered in our study.
+
+*product-parent: An identifier used to identify each product.
+
+*product_title: Title of the product.
+
+*product_category: Category of a product.
+
+*star_rating: The rating given by the reviewer.
+
+*verified_purchase: If the reviewer is verified to have purchased the product.
+
+*review_date: The date of the review.
+
+![](C:/Users/Bingyan/Desktop/STAT605/group 4/image1.png)
+
+**Statistical Computation**
+
+![](C:/Users/Bingyan/Desktop/STAT605/group 4/image2.png)
+
+![](C:/Users/Bingyan/Desktop/STAT605/group 4/image3.png)
+
+We consider a product to be good when it has both a huge number of reviews and a solid star rating. In order to find our target products, we first separated the large dataset into 50 parts. In each job, we only keep the column “product parent”. After merging all of the files generated from the last step, we applied unique sort, and head functions, which enabled us to get the product parent of the top 100 reviewed products. With the top 100 list, we returned to the large 11 GB dataset, dividing it into 50 parts, and filtering each of them by removing reviews that are not purchasing verified. Then we keep those rows whose product parent is on our top 100 list. In this way, we gain a file containing all of the reviews on the top 100 reviewed products. Splitting the file by “product parent”, we have each product as an individual file where we can calculate the average rating and take the top 5 rated products. In each job, we requested memory of 1GB and a disk size of 500 MB. The first two jobs took slightly more than 10 minutes and the third one is finished within 10 minutes.
+
+**Analysis**
+
+![Figure 1. Number of reviews of Top 10 products by month](top 10.png)
+
+Those ten plots above depict the change in the number of reviews by month of the ten products with the highest average rating among the top 100 reviewed ones. It is easy to notice that the number of reviews surged whenever a new episode or season is published. Another interesting phenomenon we found is that there are 4 seasons of the Downton Abbey TV series among the top 10 products.
+
+![](downtown_abbey.png)
+
+In Figure 2, there is a clear trend in the number of reviews of 4 seasons of the Downton Abbey TV series. All of them increased each winter and summer. It is very reasonable as people usually have more time to enjoy TV series during Christmas or summer breaks and thus make more comments on them. Moreover, our claim made from the paragraph before is confirmed that the number of reviews on Downton Abbey arose around the release date of new seasons. 
+
+![Figure 3. The number of reviews of Men’s Body Groomer](image4.png)
+
+Despite most of the popular reviewed products being digital videos, it is also very intriguing to focus on products from other categories. Here we have the monthly reviewed frequency of a Male’s body groomer shown in the graph above. With a huge number of reviews (most are removed as being not verified purchases), and a decent average star rating, the body groomer, as a daily-use product, has an overall increase in popularity.
+
+**Conclusion**
+
+We found that “good products” from the digital video category do not always become more popular as time passes. Instead, reviews on them proliferated during people’s holidays or whenever a new season is dropped. However, for a daily-use product, when it is widely recognized, an increasing number of purchasing and reviews can be expected. In the future, we can improve our project with a more recent larger dataset containing more categories.
+
+
+
